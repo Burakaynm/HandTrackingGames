@@ -2,58 +2,48 @@ using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandController : MonoBehaviour
+public static class HandController
 {
-    // Singleton instance of HandController
-    public static HandController instance;
+    public static Finger[] fingers = new Finger[5];
 
-    // List of fingers with their root objects
-    [SerializeField] public List<FingerWithRoot> fingers;
-
-    private void Start()
+    static HandController()
     {
-        instance = this;
+        InitializeFingers();
     }
 
-    // Method to control the movement of a finger
-    public void FingerMove(Finger finger, FingerMove move)
+    private static void InitializeFingers()
     {
-        foreach (FingerWithRoot fingerWithRoot in fingers)
+        for (int i = 0; i < fingers.Length; i++)
         {
-            if (fingerWithRoot.finger == finger)
-            {
-                // Get the Animator component from the finger root
-                Animator animator = fingerWithRoot.fingerRoot.GetComponent<Animator>();
-
-                // Determine the animation direction based on the movement
-                float direction = move == global::FingerMove.Open ? -1 : 1;
-
-                // Play the animation
-                animator.Play("Move", 0, direction);
-            }
+            fingers[i] = new Finger((FingerName)i, FingerState.Open);
         }
     }
 }
 
-[System.Serializable]// Class representing a finger and its root object
-public class FingerWithRoot
+[System.Serializable]
+public class Finger
 {
-    public GameObject fingerRoot;
-    public Finger finger;
+    public FingerName fingerName;
+    public FingerState fingerState;
+
+    public Finger(FingerName name, FingerState state)
+    {
+        fingerName = name;
+        fingerState = state;
+    }
 }
 
-// Enum to represent different fingers
-public enum Finger
+public enum FingerName
 {
-    Thumb,
-    Index,
-    Middle,
-    Ring,
-    Little
+    Thumb,    // Baþ Parmak
+    Index,    // Ýþaret Parmak
+    Middle,   // Orta Parmak
+    Ring,     // Yüzük Parmak
+    Little    // Serçe Parmak
 }
 
-// Enum to represent finger movements
-public enum FingerMove
+
+public enum FingerState
 {
     Open,
     Close
