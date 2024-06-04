@@ -11,7 +11,7 @@ public class HandTracking : MonoBehaviour
     public GameObject errorPanel;
     Vector3[] smoothPositions;
     public float smoothingFactor = 0.1f;
-    public TextMeshProUGUI avarageFingerDistanceText_UI,distanceFromCamText_UI,fingerStateText_UI,errorText_UI;
+    public TextMeshProUGUI distanceFromCamText_UI,fingerStateText_UI,fingerAngleText_UI,errorText_UI;
     bool handOutRange, handOutDistance;
     public float dataTimeout = 2.0f;
     private float lastReceivedTime;
@@ -34,34 +34,38 @@ public class HandTracking : MonoBehaviour
         if (!string.IsNullOrEmpty(data))
         {
             lastReceivedTime = Time.time;
-            data = data.Trim(new char[] { '[', ']' });
-            string[] points = data.Split(',');
-
-            if (points.Length == 63)
-            {
-                for (int i = 0; i < 21; i++)
-                {
-                    float x = 7 - float.Parse(points[i * 3]) / 100;
-                    float y = float.Parse(points[i * 3 + 1]) / 100;
-                    float z = float.Parse(points[i * 3 + 2]) / 100;
-
-                    Vector3 targetPosition = new Vector3(x, y, z);
-                    smoothPositions[i] = Vector3.Lerp(smoothPositions[i], targetPosition, smoothingFactor);
-
-                    handPoints[i].transform.localPosition = smoothPositions[i];
-                }
-
-                HandPositioner();
-                return;
-            }
+            ProcessData(data);
         }
-
-        if (Time.time - lastReceivedTime > dataTimeout)
+        else if (Time.time - lastReceivedTime > dataTimeout)
         {
             ShowErrorPanel("HAND NOT DETECTED");
             handPoints[0].transform.position = Vector3.one * 1000;
         }
     }
+
+    void ProcessData(string data)
+    {
+        data = data.Trim(new char[] { '[', ']' });
+        string[] points = data.Split(',');
+
+        if (points.Length == 63)
+        {
+            for (int i = 0; i < 21; i++)
+            {
+                float x = 7 - float.Parse(points[i * 3]) / 100;
+                float y = float.Parse(points[i * 3 + 1]) / 100;
+                float z = float.Parse(points[i * 3 + 2]) / 100;
+
+                Vector3 targetPosition = new Vector3(x, y, z);
+                smoothPositions[i] = Vector3.Lerp(smoothPositions[i], targetPosition, smoothingFactor);
+
+                handPoints[i].transform.localPosition = smoothPositions[i];
+            }
+
+            HandPositioner();
+        }
+    }
+
 
     void ShowErrorPanel(string errorMessage)
     {
@@ -79,15 +83,9 @@ public class HandTracking : MonoBehaviour
             errorPanel.transform.DOScale(Vector3.zero, 0.5f);
         }
     }
-
-    void HandPositioner()
+    void SetFingerState()
     {
-        bool hasError = CheckPointsInRange() || CheckHandDistance();
-        if (!hasError)
-        {
-            HideErrorPanel();
-        }
-        if (Vector3.Distance(handPoints[3].transform.position, handPoints[4].transform.position)*3> Vector3.Distance(handPoints[4].transform.position, handPoints[9].transform.position))
+        if (Vector3.Distance(handPoints[3].transform.position, handPoints[4].transform.position) * 2.5 > Vector3.Distance(handPoints[4].transform.position, handPoints[9].transform.position))
         {
             HandController.fingers[0].fingerState = FingerState.Close;
         }
@@ -127,36 +125,39 @@ public class HandTracking : MonoBehaviour
         {
             HandController.fingers[4].fingerState = FingerState.Open;
         }
-        fingerStateText_UI.text = "";
+        fingerStateText_UI.text = "STATES\n";
         for (int i = 0; i < HandController.fingers.Length; i++)
         {
-            fingerStateText_UI.text += HandController.fingers[i].fingerName.ToString() + " : " + HandController.fingers[i].fingerState.ToString()+"\n";
+            fingerStateText_UI.text += HandController.fingers[i].fingerName.ToString() + " : " + HandController.fingers[i].fingerState.ToString() + "\n";
         }
-        float thumbDistance = Vector3.Distance(handPoints[4].transform.position, handPoints[2].transform.position);
-        float indexDistance = Vector3.Distance(handPoints[8].transform.position, handPoints[5].transform.position);
-        float middleDistance = Vector3.Distance(handPoints[12].transform.position, handPoints[9].transform.position);
-        float ringDistance = Vector3.Distance(handPoints[16].transform.position, handPoints[13].transform.position);
-        float littleDistance = Vector3.Distance(handPoints[20].transform.position, handPoints[17].transform.position);
-
-        float averageDistance = (thumbDistance + indexDistance + middleDistance + ringDistance + littleDistance) / 5;
-
-        float palmToThumbAngle = Vector3.Angle(handPoints[0].transform.position - handPoints[9].transform.position, handPoints[4].transform.position - handPoints[9].transform.position);
-        float palmToIndexAngle = Vector3.Angle(handPoints[0].transform.position - handPoints[9].transform.position, handPoints[8].transform.position - handPoints[9].transform.position);
-        float palmToMiddleAngle = Vector3.Angle(handPoints[0].transform.position - handPoints[9].transform.position, handPoints[12].transform.position - handPoints[9].transform.position);
-        float palmToRingAngle = Vector3.Angle(handPoints[0].transform.position - handPoints[9].transform.position, handPoints[16].transform.position - handPoints[9].transform.position);
-        float palmToLittleAngle = Vector3.Angle(handPoints[0].transform.position - handPoints[9].transform.position, handPoints[20].transform.position - handPoints[9].transform.position);
-
-        bool isFist = thumbDistance < 0.04f && indexDistance < 0.04f && middleDistance < 0.04f && ringDistance < 0.04f && littleDistance < 0.04f;
-
-        Debug.Log("Is Fist: " + isFist);
-        avarageFingerDistanceText_UI.text = "Average Finger Distance: " + averageDistance;
-        distanceFromCamText_UI.text = "Hand-Webcam Distance: " + Vector3.Distance(handPoints[0].transform.position, handPoints[17].transform.position).ToString();
-        Debug.Log("Palm to Thumb Angle: " + palmToThumbAngle);
-        Debug.Log("Palm to Index Angle: " + palmToIndexAngle);
-        Debug.Log("Palm to Middle Angle: " + palmToMiddleAngle);
-        Debug.Log("Palm to Ring Angle: " + palmToRingAngle);
-        Debug.Log("Palm to Little Angle: " + palmToLittleAngle);
     }
+    void SetFingerAngles()
+    {
+        float[] fingerAngles = { 
+            Vector3.Angle(handPoints[4].transform.position - handPoints[3].transform.position, handPoints[8].transform.position - handPoints[7].transform.position),
+            Vector3.Angle(handPoints[8].transform.position - handPoints[7].transform.position, handPoints[12].transform.position - handPoints[11].transform.position),
+            Vector3.Angle(handPoints[12].transform.position - handPoints[11].transform.position, handPoints[16].transform.position - handPoints[15].transform.position),
+            Vector3.Angle(handPoints[16].transform.position - handPoints[15].transform.position, handPoints[20].transform.position - handPoints[19].transform.position)
+        };
+        fingerAngleText_UI.text = "ANGELS\n";
+        for (int i = 0; i < HandController.angles.Length; i++)
+        {
+            HandController.angles[i].angle = fingerAngles[i];
+            fingerAngleText_UI.text += HandController.angles[i].finger1.fingerName + "-" + HandController.angles[i].finger2.fingerName + " : " + HandController.angles[i].angle+"\n";
+        }
+    }
+    void HandPositioner()
+    {
+        SetFingerState();
+        SetFingerAngles();
+        bool hasError = CheckPointsInRange() || CheckHandDistance();
+        if (!hasError)
+        {
+            HideErrorPanel();
+        }
+        distanceFromCamText_UI.text = "Hand-Webcam Distance: " + Vector3.Distance(handPoints[0].transform.position, handPoints[17].transform.position).ToString();
+    }
+
 
     bool CheckPointsInRange()
     {
