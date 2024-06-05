@@ -11,13 +11,14 @@ public class HandAnimationTrigger : MonoBehaviour
     public DropdownMultiSelect fingerSelection;
     public CustomDropdown actionSelection;
     public List<FingerWithAnimator> fingersWithAnimators;
+    public GameObject clickEffect;
 
 
     public void SetSelectedFingers()
     {
         List<string> selectedFingerNames = new List<string>();
         selectedFingerNames.Clear();
-        foreach(DropdownMultiSelect.Item item in fingerSelection.items)
+        foreach (DropdownMultiSelect.Item item in fingerSelection.items)
         {
             if (item.isOn)
             {
@@ -38,15 +39,18 @@ public class HandAnimationTrigger : MonoBehaviour
         foreach (FingerWithAnimator fingerwa in fingersWithAnimators)
         {
             fingerwa.animator.Play("Empty");
+            clickEffect.SetActive(false);
         }
-        for (int i=0; i < fingersWithAnimators.Count ; i++)
+        for (int i = 0; i < fingersWithAnimators.Count; i++)
         {
             if (FingersAndAction.activeFingers.Contains(fingersWithAnimators[i].fingerName))
             {
                 fingersWithAnimators[i].animator.Play(FingersAndAction.handAction.ToString());
+                clickEffect.SetActive(true);
             }
         }
     }
+
 }
 
 
