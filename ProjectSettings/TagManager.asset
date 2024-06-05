@@ -14,6 +14,11 @@ TagManager:
   - Coin
   - PlayerRay
   - Rocket
+  - Border
+  - Obstacle
+  - GameOver
+  - Ground
+  - Box
   layers:
   - Default
   - TransparentFX
