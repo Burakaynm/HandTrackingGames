@@ -39,38 +39,18 @@ public class HandAnimationTrigger : MonoBehaviour
             }
         }
     }
-    /*
-public void SetActions()
-{
-switch (actionSelection.selectedItemIndex)
-{
-    case 0:
-        action = HandAction.close; break;
-
-    case 1:
-        action = HandAction.open; break;
-
-    case 2:
-        action = HandAction.angleUp; break;
-
-    case 3:
-        action = HandAction.angleDown; break;
-}
-}
-    */
 
     public void SetFingers()
     {
-        fingers.Clear(); // Önce mevcut listeyi temizle
+        fingers.Clear();
 
         foreach (var item in fingerSelection.items)
         {
             FingerName selectedFinger;
 
-            // Enum.TryParse kullanarak seçili öðenin metnini enum'a çevir
             if (Enum.TryParse<FingerName>(item.itemName, out selectedFinger))
             {
-                fingers.Add(selectedFinger); // Ekleme iþlemi
+                fingers.Add(selectedFinger);
             }
             else
             {
