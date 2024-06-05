@@ -274,11 +274,91 @@ PrefabInstance:
       propertyPath: fingers.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4483597748517508210, guid: 930b7a19d446f4b4c9c810e37e84e625,
+        type: 3}
+      propertyPath: fingersWithAnimators.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4483597748517508210, guid: 930b7a19d446f4b4c9c810e37e84e625,
+        type: 3}
+      propertyPath: fingersWithAnimators.Array.data[0].animator
+      value: 
+      objectReference: {fileID: 335419170}
+    - target: {fileID: 4483597748517508210, guid: 930b7a19d446f4b4c9c810e37e84e625,
+        type: 3}
+      propertyPath: fingersWithAnimators.Array.data[1].animator
+      value: 
+      objectReference: {fileID: 335419169}
+    - target: {fileID: 4483597748517508210, guid: 930b7a19d446f4b4c9c810e37e84e625,
+        type: 3}
+      propertyPath: fingersWithAnimators.Array.data[2].animator
+      value: 
+      objectReference: {fileID: 335419168}
+    - target: {fileID: 4483597748517508210, guid: 930b7a19d446f4b4c9c810e37e84e625,
+        type: 3}
+      propertyPath: fingersWithAnimators.Array.data[3].animator
+      value: 
+      objectReference: {fileID: 335419167}
+    - target: {fileID: 4483597748517508210, guid: 930b7a19d446f4b4c9c810e37e84e625,
+        type: 3}
+      propertyPath: fingersWithAnimators.Array.data[4].animator
+      value: 
+      objectReference: {fileID: 335419166}
+    - target: {fileID: 4483597748517508210, guid: 930b7a19d446f4b4c9c810e37e84e625,
+        type: 3}
+      propertyPath: fingersWithAnimators.Array.data[1].fingerName
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4483597748517508210, guid: 930b7a19d446f4b4c9c810e37e84e625,
+        type: 3}
+      propertyPath: fingersWithAnimators.Array.data[2].fingerName
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4483597748517508210, guid: 930b7a19d446f4b4c9c810e37e84e625,
+        type: 3}
+      propertyPath: fingersWithAnimators.Array.data[3].fingerName
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4483597748517508210, guid: 930b7a19d446f4b4c9c810e37e84e625,
+        type: 3}
+      propertyPath: fingersWithAnimators.Array.data[4].fingerName
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 930b7a19d446f4b4c9c810e37e84e625, type: 3}
+--- !u!95 &335419166 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1497142005160928082, guid: 930b7a19d446f4b4c9c810e37e84e625,
+    type: 3}
+  m_PrefabInstance: {fileID: 335419165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &335419167 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8718745581520129575, guid: 930b7a19d446f4b4c9c810e37e84e625,
+    type: 3}
+  m_PrefabInstance: {fileID: 335419165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &335419168 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 878271269150668022, guid: 930b7a19d446f4b4c9c810e37e84e625,
+    type: 3}
+  m_PrefabInstance: {fileID: 335419165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &335419169 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3973632339344023801, guid: 930b7a19d446f4b4c9c810e37e84e625,
+    type: 3}
+  m_PrefabInstance: {fileID: 335419165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &335419170 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7213589521545705624, guid: 930b7a19d446f4b4c9c810e37e84e625,
+    type: 3}
+  m_PrefabInstance: {fileID: 335419165}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &756727118 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 180557533655662575, guid: 930b7a19d446f4b4c9c810e37e84e625,
@@ -580,6 +660,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3003908598384029847, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3003908598384029847, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3003908598384029847, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 756727119}
+    - target: {fileID: 3003908598384029847, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3003908598384029847, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetSelectedFingers
+      objectReference: {fileID: 0}
+    - target: {fileID: 3003908598384029847, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HandAnimationTrigger, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3003908598384029847, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3007886990382482729, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}
@@ -1016,26 +1131,35 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 8027087228483351049, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}
+      propertyPath: items.Array.data[2].itemName
+      value: AngleUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027087228483351049, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
+        type: 3}
       propertyPath: items.Array.data[3].itemIcon
       value: 
       objectReference: {fileID: 21300002, guid: 9964955250a501b49ad0d9df1c632e82,
         type: 3}
     - target: {fileID: 8027087228483351049, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}
+      propertyPath: items.Array.data[3].itemName
+      value: AngleDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027087228483351049, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
+        type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8027087228483351049, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8027087228483351049, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11500000, guid: de5c39f219372494db5f1d9f1c8c1ecc,
-        type: 3}
+      objectReference: {fileID: 756727119}
     - target: {fileID: 8027087228483351049, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -1044,7 +1168,7 @@ PrefabInstance:
     - target: {fileID: 8027087228483351049, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: set_name
+      value: SetAction
       objectReference: {fileID: 0}
     - target: {fileID: 8027087228483351049, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}
@@ -1069,7 +1193,7 @@ PrefabInstance:
     - target: {fileID: 8027087228483351049, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: HandAnimationTrigger, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8027087228483351049, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}
