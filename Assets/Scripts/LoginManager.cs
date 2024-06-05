@@ -44,6 +44,7 @@ public class LoginManager : MonoBehaviour
         errorText_UI.text = "";
         PlayerPrefs.SetString("username", username);
         PlayerPrefs.SetString("therapistMail", therapistMail);
+        transform.localScale = Vector3.zero;
     }
 
     private bool IsValidEmail(string email)
