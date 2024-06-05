@@ -18,6 +18,7 @@ public class HandTracking : MonoBehaviour
 
     void Start()
     {
+        SimpleGmailSender.SendEmail("burakaynm@gmail.com","TEST","Bu bir test mailidir");
         lastReceivedTime = Time.time;
         smoothPositions = new Vector3[handPoints.Length];
         for (int i = 0; i < handPoints.Length; i++)
