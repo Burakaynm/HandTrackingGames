@@ -5,7 +5,10 @@ using UnityEngine;
 public static class HandController
 {
     public static Finger[] fingers = new Finger[5];
-    public static Angle[] angles = new Angle[4];
+    public static FingerWithAngle[] angles = new FingerWithAngle[4];
+    public static bool canAction = true;
+    public static bool onAction;
+    public static bool onActionPersistent = false;
 
     static HandController()
     {
@@ -24,9 +27,178 @@ public static class HandController
     {
         for (int i = 0; i < angles.Length; i++)
         {
-            angles[i] = new Angle(fingers[i], fingers[i+1],10);
+            angles[i] = new FingerWithAngle(fingers[i], fingers[i + 1], 10,FingersAngle.AngleUp);
         }
     }
+
+    public static bool IsAction()
+    {
+        if (FingersAndAction.handAction==HandAction.Close || FingersAndAction.handAction == HandAction.Open)
+        {
+            bool allFingersOpen = true;
+            bool allFingersClosed = true;
+
+            for (int i = 0; i < fingers.Length; i++)
+            {
+                if (true /*FingersAndAction.activeFingers.Contains(fingers[i].fingerName)*/)
+                {
+                    if (fingers[i].fingerState == FingerState.Open)
+                    {
+                        allFingersClosed = false; // Eðer bir parmak açýksa, hepsi kapalý olamaz
+                    }
+                    else if (fingers[i].fingerState == FingerState.Close)
+                    {
+                        allFingersOpen = false; // Eðer bir parmak kapalýysa, hepsi açýk olamaz
+                    }
+                }
+            }
+            if (FingersAndAction.handAction == HandAction.Close)
+            {
+                if (allFingersOpen)
+                {
+                    canAction = true;
+                }
+
+                if (canAction && allFingersClosed)
+                {
+                    HandsActionEvents.InvokeActionDone();
+                    onAction = true;
+                    onActionPersistent = true;
+                    canAction = false;
+                }
+                else if (!allFingersClosed)
+                {
+                    if (onAction)
+                    {
+                        HandsActionEvents.InvokeActionRelased();
+                    }
+                    onAction = false;
+                    onActionPersistent = false;
+                }
+
+                // Persist onAction if the condition is met
+                if (onActionPersistent && allFingersClosed)
+                {
+                    onAction = true;
+                }
+            }
+            else if (FingersAndAction.handAction == HandAction.Open)
+            {
+                if (allFingersClosed)
+                {
+                    canAction = true;
+                }
+
+                if (canAction && allFingersOpen)
+                {
+                    HandsActionEvents.InvokeActionDone();
+                    onAction = true;
+                    onActionPersistent = true;
+                    canAction = false;
+                }
+                else if (!allFingersOpen)
+                {
+                    if (onAction)
+                    {
+                        HandsActionEvents.InvokeActionRelased();
+                    }
+                    onAction = false;
+                    onActionPersistent = false;
+                }
+
+                // Persist onAction if the condition is met
+                if (onActionPersistent && allFingersOpen)
+                {
+                    onAction = true;
+                }
+            }
+        }
+        else if (FingersAndAction.handAction == HandAction.AngleUp || FingersAndAction.handAction == HandAction.AngleDown)
+        {
+            bool allFingersAngleUp = true;
+            bool allFingersAngleDown = true;
+
+            for (int i = 0; i < angles.Length; i++)
+            {
+                if (true)//FingersAndAction.activeFingers.Contains(angles[i].finger1.fingerName) && FingersAndAction.activeFingers.Contains(angles[i].finger2.fingerName))
+                {
+                    if (angles[i].fingersAngle == FingersAngle.AngleUp)
+                    {
+                        allFingersAngleDown = false;
+                    }
+                    else if (angles[i].fingersAngle == FingersAngle.AngleDown)
+                    {
+                        allFingersAngleUp = false;
+                    }
+                }
+
+            }
+            if (FingersAndAction.handAction == HandAction.AngleUp)
+            {
+
+                if (allFingersAngleDown)
+                {
+                    canAction = true;
+                }
+
+                if (canAction && allFingersAngleUp)
+                {
+                    HandsActionEvents.InvokeActionDone();
+                    onAction = true;
+                    onActionPersistent = true;
+                    canAction = false;
+                }
+                else if (!allFingersAngleUp)
+                {
+                    if (onAction)
+                    {
+                        HandsActionEvents.InvokeActionRelased();
+                    }
+                    onAction = false;
+                    onActionPersistent = false;
+                }
+
+                // Persist onAction if the condition is met
+                if (onActionPersistent && allFingersAngleUp)
+                {
+                    onAction = true;
+                }
+            }
+            else if (FingersAndAction.handAction == HandAction.AngleDown)
+            {
+
+                if (allFingersAngleUp)
+                {
+                    canAction = true;
+                }
+
+                if (canAction && allFingersAngleDown)
+                {
+                    HandsActionEvents.InvokeActionDone();
+                    onAction = true;
+                    onActionPersistent = true;
+                    canAction = false;
+                }
+                else if (!allFingersAngleDown)
+                {
+                    if (onAction)
+                    {
+                        HandsActionEvents.InvokeActionRelased();
+                    }
+                    onAction = false;
+                    onActionPersistent = false;
+                }
+                if (onActionPersistent && allFingersAngleDown)
+                {
+                    onAction = true;
+                }
+            }
+        }
+        return onAction;
+    }
+
+
+
 }
 
 [System.Serializable]
@@ -42,16 +214,18 @@ public class Finger
     }
 }
 [System.Serializable]
-public class Angle
+public class FingerWithAngle
 {
     public Finger finger1, finger2;
+    public FingersAngle fingersAngle;
     public float angle;
 
-    public Angle(Finger finger1_, Finger finger2_, float angle_)
+    public FingerWithAngle(Finger finger1_, Finger finger2_, float angle_, FingersAngle fingersAngle_)
     {
         finger1 = finger1_;
         finger2 = finger2_;
         angle = angle_;
+        this.fingersAngle = fingersAngle_;
     }
 }
 
@@ -69,4 +243,9 @@ public enum FingerState
 {
     Open,
     Close
+}
+public enum FingersAngle
+{
+    AngleUp,
+    AngleDown
 }

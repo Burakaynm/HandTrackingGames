@@ -15,10 +15,10 @@ public class HandTracking : MonoBehaviour
     bool handOutRange, handOutDistance;
     public float dataTimeout = 2.0f;
     private float lastReceivedTime;
+    public float webcamDistance;
 
     void Start()
     {
-        SimpleGmailSender.SendEmail("burakaynm@gmail.com","TEST","Bu bir test mailidir");
         lastReceivedTime = Time.time;
         smoothPositions = new Vector3[handPoints.Length];
         for (int i = 0; i < handPoints.Length; i++)
@@ -135,16 +135,60 @@ public class HandTracking : MonoBehaviour
     void SetFingerAngles()
     {
         float[] fingerAngles = { 
-            Vector3.Angle(handPoints[4].transform.position - handPoints[3].transform.position, handPoints[8].transform.position - handPoints[7].transform.position),
-            Vector3.Angle(handPoints[8].transform.position - handPoints[7].transform.position, handPoints[12].transform.position - handPoints[11].transform.position),
-            Vector3.Angle(handPoints[12].transform.position - handPoints[11].transform.position, handPoints[16].transform.position - handPoints[15].transform.position),
-            Vector3.Angle(handPoints[16].transform.position - handPoints[15].transform.position, handPoints[20].transform.position - handPoints[19].transform.position)
+            Vector3.Distance(handPoints[4].transform.position,handPoints[8].transform.position),
+            Vector3.Distance(handPoints[8].transform.position, handPoints[12].transform.position),
+            Vector3.Distance(handPoints[12].transform.position, handPoints[16].transform.position),
+            Vector3.Distance(handPoints[16].transform.position, handPoints[20].transform.position)
         };
         fingerAngleText_UI.text = "ANGELS\n";
         for (int i = 0; i < HandController.angles.Length; i++)
         {
-            HandController.angles[i].angle = fingerAngles[i];
-            fingerAngleText_UI.text += HandController.angles[i].finger1.fingerName + "-" + HandController.angles[i].finger2.fingerName + " : " + HandController.angles[i].angle+"\n";
+            HandController.angles[i].angle = 10*fingerAngles[i]/webcamDistance;
+            if (i==0)
+            {
+                if (HandController.angles[i].angle > 11)
+                {
+                    HandController.angles[i].fingersAngle = FingersAngle.AngleUp;
+                }
+                else
+                {
+                    HandController.angles[i].fingersAngle = FingersAngle.AngleDown;
+                }
+            }
+            if (i==1)
+            {
+                if (HandController.angles[i].angle > 4)
+                {
+                    HandController.angles[i].fingersAngle = FingersAngle.AngleUp;
+                }
+                else
+                {
+                    HandController.angles[i].fingersAngle = FingersAngle.AngleDown;
+                }
+            }
+            if (i==2)
+            {
+                if (HandController.angles[i].angle > 4)
+                {
+                    HandController.angles[i].fingersAngle = FingersAngle.AngleUp;
+                }
+                else
+                {
+                    HandController.angles[i].fingersAngle = FingersAngle.AngleDown;
+                }
+            }
+            if (i==3)
+            {
+                if (HandController.angles[i].angle > 5.5)
+                {
+                    HandController.angles[i].fingersAngle = FingersAngle.AngleUp;
+                }
+                else
+                {
+                    HandController.angles[i].fingersAngle = FingersAngle.AngleDown;
+                }
+            }
+            fingerAngleText_UI.text += HandController.angles[i].finger1.fingerName + "-" + HandController.angles[i].finger2.fingerName + " : " + HandController.angles[i].angle.ToString("N3")+HandController.angles[i].fingersAngle.ToString()+"\n";
         }
     }
     void HandPositioner()
@@ -184,13 +228,14 @@ public class HandTracking : MonoBehaviour
     {
         if (!handOutRange)
         {
-            if (Vector3.Distance(handPoints[0].transform.position, handPoints[17].transform.position) < 1f)
+            webcamDistance = Vector3.Distance(handPoints[0].transform.position, handPoints[17].transform.position);
+            if (webcamDistance < 1f)
             {
                 ShowErrorPanel("HAND SO FAR");
                 handOutDistance = true;
                 return true;
             }
-            else if (Vector3.Distance(handPoints[0].transform.position, handPoints[17].transform.position) > 3)
+            else if (webcamDistance > 3)
             {
                 ShowErrorPanel("HAND SO CLOSE");
                 handOutDistance = true;

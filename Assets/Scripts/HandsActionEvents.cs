@@ -1,18 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandsActionEvents : MonoBehaviour
+public static class HandsActionEvents
 {
-    // Start is called before the first frame update
-    void Start()
+    public static event Action<bool> ActionDone;
+    public static event Action<bool> ActionRelased;
+    public static void InvokeActionDone()
     {
-        
+        ActionDone?.Invoke(true);
     }
-
-    // Update is called once per frame
-    void Update()
+    public static void InvokeActionRelased()
     {
-        
+        ActionRelased?.Invoke(true);
     }
 }
