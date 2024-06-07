@@ -8,6 +8,6 @@ public class FlappyBirdRestartGame : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

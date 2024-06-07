@@ -12,11 +12,22 @@ public class FlappyBirdGameManager : MonoBehaviour
         Time.timeScale = 1f;
         Instance = this;
     }
-    private void Update()
+    private void OnEnable()
     {
-        if (Input.GetMouseButtonDown(0) && isGameStarted==false)
+        HandsActionEvents.ActionDone += StartGame;
+    }
+    private void OnDisable()
+    {
+        HandsActionEvents.ActionDone -= StartGame;
+    }
+    void StartGame(bool temp)
+    {
+        if (!isGameStarted)
         {
             isGameStarted = true;
         }
+
     }
+
+
 }

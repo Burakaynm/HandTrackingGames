@@ -6,7 +6,7 @@ using UnityEngine;
 public static class FingersAndAction
 {
     public static List<FingerName> activeFingers=new List<FingerName>();
-    public static HandAction handAction=HandAction.AngleDown;
+    public static HandAction handAction=HandAction.Close;
 
 
     public static void SetActiveFingers(List<string> newActiveFingers)

@@ -49,20 +49,27 @@ public class Bird : MonoBehaviour
         gameOverBestScoreText.text = PlayerPrefs.GetInt("BestScore").ToString();
         SaveScoreToFile(score);
     }
+    private void OnEnable()
+    {
+        HandsActionEvents.ActionDone += JumpBird;
+    }
+    private void OnDisable()
+    {
+        HandsActionEvents.ActionDone -= JumpBird;
+    }
 
-    private void Update()
+    void JumpBird(bool temp)
     {
         if (FlappyBirdGameManager.Instance.isGameStarted)
         {
             rb.gravityScale = 1f;
-            if (Input.GetMouseButtonDown(0) && isDeath == false)
+            if (!isDeath)
             {
                 rb.velocity = Vector2.zero;
                 rb.AddForce(Vector2.up * ziplamaGucu);
             }
         }
     }
-
     private void FixedUpdate()
     {
         if (rb.velocity.y < 0)
