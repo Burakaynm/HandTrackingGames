@@ -40,15 +40,15 @@ public static class HandController
 
             for (int i = 0; i < fingers.Length; i++)
             {
-                if (true /*FingersAndAction.activeFingers.Contains(fingers[i].fingerName)*/)
+                if (FingersAndAction.activeFingers.Contains(fingers[i].fingerName))
                 {
                     if (fingers[i].fingerState == FingerState.Open)
                     {
-                        allFingersClosed = false; // Eðer bir parmak açýksa, hepsi kapalý olamaz
+                        allFingersClosed = false;
                     }
                     else if (fingers[i].fingerState == FingerState.Close)
                     {
-                        allFingersOpen = false; // Eðer bir parmak kapalýysa, hepsi açýk olamaz
+                        allFingersOpen = false;
                     }
                 }
             }
@@ -76,7 +76,6 @@ public static class HandController
                     onActionPersistent = false;
                 }
 
-                // Persist onAction if the condition is met
                 if (onActionPersistent && allFingersClosed)
                 {
                     onAction = true;
@@ -106,7 +105,6 @@ public static class HandController
                     onActionPersistent = false;
                 }
 
-                // Persist onAction if the condition is met
                 if (onActionPersistent && allFingersOpen)
                 {
                     onAction = true;
@@ -120,7 +118,7 @@ public static class HandController
 
             for (int i = 0; i < angles.Length; i++)
             {
-                if (true)//FingersAndAction.activeFingers.Contains(angles[i].finger1.fingerName) && FingersAndAction.activeFingers.Contains(angles[i].finger2.fingerName))
+                if (FingersAndAction.activeFingers.Contains(angles[i].finger1.fingerName) && FingersAndAction.activeFingers.Contains(angles[i].finger2.fingerName))
                 {
                     if (angles[i].fingersAngle == FingersAngle.AngleUp)
                     {
