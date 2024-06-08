@@ -9,6 +9,8 @@ public class LoginManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI usernameText_UI;
     [SerializeField] TextMeshProUGUI therapistMailText_UI;
     [SerializeField] TextMeshProUGUI errorText_UI;
+    [SerializeField] GameObject selectionScreen;
+
 
 
     private void Start()
@@ -16,10 +18,12 @@ public class LoginManager : MonoBehaviour
         if (PlayerPrefs.HasKey("username"))
         {
             transform.localScale = Vector3.zero;
+            selectionScreen.transform.localScale = Vector3.one;
         }
         else
         {
             transform.localScale= Vector3.one;
+            selectionScreen.transform.localScale = Vector3.zero;
         }
     }
 
@@ -45,6 +49,7 @@ public class LoginManager : MonoBehaviour
         PlayerPrefs.SetString("username", username);
         PlayerPrefs.SetString("therapistMail", therapistMail);
         transform.localScale = Vector3.zero;
+        selectionScreen.transform.localScale = Vector3.one;
     }
 
     private bool IsValidEmail(string email)

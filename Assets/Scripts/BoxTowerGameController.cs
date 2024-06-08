@@ -36,7 +36,6 @@ public class BoxTowerGameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetMouseInput();
         if (gameOver)
         {
             Time.timeScale = 0f;
@@ -48,13 +47,17 @@ public class BoxTowerGameController : MonoBehaviour
             }
         }
     }
-
-    void GetMouseInput()
+    private void OnEnable()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
+        HandsActionEvents.ActionDone += GetMouseInput;
+    }
+    private void OnDisable()
+    {
+        HandsActionEvents.ActionDone -= GetMouseInput;
+    }
+    void GetMouseInput(bool tempBool)
+    {
             currentBox.DropBox();
-        }
     }
     public void SetGameOver()
     {

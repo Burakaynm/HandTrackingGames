@@ -12,7 +12,7 @@ public class SceneTransition : MonoBehaviour
         Instance = this;
     }
 
-    public void LoadLevel(string sceneName)
+    public void LoadScene(string sceneName)
     {
         TransitionManager.Instance().Transition(sceneName, transition, 0);
     }

@@ -40,7 +40,7 @@ public static class HandController
 
             for (int i = 0; i < fingers.Length; i++)
             {
-                if (true)//FingersAndAction.activeFingers.Contains(fingers[i].fingerName))
+                if (FingersAndAction.activeFingers.Contains(fingers[i].fingerName))
                 {
                     if (fingers[i].fingerState == FingerState.Open)
                     {
@@ -118,7 +118,7 @@ public static class HandController
 
             for (int i = 0; i < angles.Length; i++)
             {
-                if (true)//FingersAndAction.activeFingers.Contains(angles[i].finger1.fingerName) && FingersAndAction.activeFingers.Contains(angles[i].finger2.fingerName))
+                if (FingersAndAction.activeFingers.Contains(angles[i].finger1.fingerName) && FingersAndAction.activeFingers.Contains(angles[i].finger2.fingerName))
                 {
                     if (angles[i].fingersAngle == FingersAngle.AngleUp)
                     {
