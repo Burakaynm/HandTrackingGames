@@ -28,11 +28,11 @@ public class Bird : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        score++;
-        scoreText.text = score.ToString();
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    score++;
+    //    scoreText.text = score.ToString();
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -67,6 +67,8 @@ public class Bird : MonoBehaviour
             {
                 rb.velocity = Vector2.zero;
                 rb.AddForce(Vector2.up * ziplamaGucu);
+                score++;
+                scoreText.text = score.ToString();
             }
         }
     }
