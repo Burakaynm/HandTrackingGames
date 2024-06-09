@@ -90,7 +90,6 @@ public class Bird : MonoBehaviour
         {
             File.WriteAllText(path, "Game Scores\n");
         }
-
-        File.AppendAllText(path, "Score: " + score.ToString() + "\n");
+        File.AppendAllText(path, "Game: Flappy Bird, " + "Score: " + score.ToString() + "\n");
     }
 }

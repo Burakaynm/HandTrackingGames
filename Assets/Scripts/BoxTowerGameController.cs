@@ -99,8 +99,7 @@ public class BoxTowerGameController : MonoBehaviour
         {
             File.WriteAllText(path, "Game Scores\n");
         }
-
-        File.AppendAllText(path, "Score: " + score.ToString() + "\n");
+        File.AppendAllText(path, "Game: Box Tower, " + "Score: " + score.ToString() + "\n");
     }
 
 }
