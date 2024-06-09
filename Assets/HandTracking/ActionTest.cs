@@ -8,7 +8,10 @@ public class ActionTest : MonoBehaviour
     [SerializeField] TextMeshProUGUI textMeshProUGUI;
     private void Update()
     {
-        HandController.IsAction();
+        if (HandController.IsAction())
+        {
+            Debug.Log("Action");
+        }
         textMeshProUGUI.text = "Action: " + HandController.onAction + "\n" + "CanAction: " + HandController.canAction;
     }
 }

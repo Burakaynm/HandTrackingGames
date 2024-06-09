@@ -836,7 +836,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3414466714729114129, guid: fc7781b263096cf488acb45a3842892a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3961234177869219624, guid: fc7781b263096cf488acb45a3842892a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658961525174017582, guid: fc7781b263096cf488acb45a3842892a,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1401,7 +1411,7 @@ PrefabInstance:
     - target: {fileID: 3114341129885147233, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 78032.5
+      value: 81445
       objectReference: {fileID: 0}
     - target: {fileID: 3114586676156805927, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}
@@ -1711,7 +1721,7 @@ PrefabInstance:
     - target: {fileID: 7921334402196488663, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 77175
+      value: 80550
       objectReference: {fileID: 0}
     - target: {fileID: 9222266542206167390, guid: 65fb12f853ee0b14a8fcd17f3d7c2cdb,
         type: 3}

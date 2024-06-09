@@ -525,6 +525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transition: {fileID: 11400000, guid: 013263c83b6a84c4d95beaa8bd163ac8, type: 2}
+  transitionManager: {fileID: 4156427541216765537}
 --- !u!114 &4156427541216765537
 MonoBehaviour:
   m_ObjectHideFlags: 0
