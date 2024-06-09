@@ -37,7 +37,7 @@ public class TerrainGenerator : MonoBehaviour
             {
                 if (firstOne)
                 {
-                    whichTerrain = Random.Range(0, terrainDatas.Count-1);
+                    whichTerrain = 0;
                     GameObject terrain = Instantiate(terrainDatas[whichTerrain].terrain, currentPosition, Quaternion.identity, terrainHolder);
                     currentTerrains.Add(terrain);
                     //Debug.Log("firstOne=" + (terrainDatas.Count - 1));

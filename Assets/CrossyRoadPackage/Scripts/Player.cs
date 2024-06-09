@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     private bool canTakeInput;
     public GameObject restartPanel;
     public Text lastScore;
+    [SerializeField] Animator rabbitAnimator;
 
     private void Awake()
     {
@@ -29,23 +31,25 @@ public class Player : MonoBehaviour
         scoreText.text = score.ToString();
 
     }
-    void Update()
+    private void OnEnable()
     {
-        Movement();
+        HandsActionEvents.ActionDone += Movement;
     }
-    void Movement()
+    private void OnDisable()
+    {
+        HandsActionEvents.ActionDone -= Movement;
+    }
+    void Movement(bool tempBool)
     {
         if (canTakeInput)
         {
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-
-                transform.position += Vector3.right;
+                transform.DOComplete();
+                rabbitAnimator.Play("Rabbit_Run");
+                transform.DOMoveX(transform.position.x+Vector3.right.x,0.665f/2).OnComplete(()=>rabbitAnimator.Play("Rabbit_Idle"));
+                //transform.position += Vector3.right;
                 terrainGenerator.SpawnTerrains(false, transform.position, false);
                 score++;
                 scoreText.text = score.ToString();
-
-            }
         }
     }
     public void deathPlayer()

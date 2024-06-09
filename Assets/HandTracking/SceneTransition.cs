@@ -10,16 +10,8 @@ public class SceneTransition : MonoBehaviour
 
     private void Awake()
     {
-        // Ensure there is only one instance
-        if (Instance == null)
-        {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+
     }
 
     private void Start()

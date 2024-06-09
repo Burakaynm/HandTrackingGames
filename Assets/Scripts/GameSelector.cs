@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameSelector : MonoBehaviour
 {
-    string selectedGame = "Tower Box";
+    string selectedGame = "Crossy Road";
     HorizontalSelector horizontalSelector;
     private void Awake()
     {
