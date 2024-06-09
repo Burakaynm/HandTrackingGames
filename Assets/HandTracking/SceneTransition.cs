@@ -6,14 +6,40 @@ using UnityEngine;
 public class SceneTransition : MonoBehaviour
 {
     public static SceneTransition Instance;
-    [SerializeField] TransitionSettings transition;
+    [SerializeField] private TransitionSettings transition;
+
+    private void Awake()
+    {
+        // Ensure there is only one instance
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
-        Instance = this;
+        // Additional safety check
+        if (transition == null)
+        {
+            Debug.LogError("TransitionSettings nesnesi SceneTransition script'inde atanmadý.");
+        }
     }
 
     public void LoadScene(string sceneName)
     {
-        TransitionManager.Instance().Transition(sceneName, transition, 0);
+        if (transition != null)
+        {
+            TransitionManager.Instance().Transition(sceneName, transition, 0);
+        }
+        else
+        {
+            Debug.LogError("TransitionSettings atanmadý.");
+        }
     }
 }
