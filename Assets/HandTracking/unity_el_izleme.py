@@ -1,6 +1,15 @@
 import cv2
 import mediapipe as mp
 import socket
+import os
+import sys
+
+# İşaret dosyası yolu
+stop_signal_path = os.path.join(os.path.dirname(__file__), 'stop_signal.txt')
+
+# Eğer işaret dosyası varsa script'i başlatma
+if os.path.exists(stop_signal_path):
+    sys.exit()
 
 # Mediapipe Hands
 mp_hands = mp.solutions.hands
@@ -44,6 +53,15 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
+    # İşaret dosyasını kontrol et
+    if os.path.exists(stop_signal_path):
+        break
+
+# İşaret dosyasını oluştur
+with open(stop_signal_path, 'w') as f:
+    f.write("stop")
+
 # Release the capture and close windows
 cap.release()
 cv2.destroyAllWindows()
+sock.close()

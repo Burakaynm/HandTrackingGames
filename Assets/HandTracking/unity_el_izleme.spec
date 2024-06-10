@@ -5,7 +5,7 @@ a = Analysis(
     ['unity_el_izleme.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('C:\\Users\\osman\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\mediapipe', 'mediapipe')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
