@@ -30,7 +30,7 @@ public class LoginManager : MonoBehaviour
     public void Login()
     {
         string username = usernameText_UI.text;
-        string therapistMail = therapistMailText_UI.text;
+        string therapistMail = therapistMailText_UI.text.Trim();
 
         if (string.IsNullOrEmpty(username))
         {

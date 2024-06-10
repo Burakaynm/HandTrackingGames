@@ -60,14 +60,18 @@ public class Player : MonoBehaviour
     }
     public void SaveScoreToFile()
     {
-        string path = "C://Users//serha//Desktop/score.txt";
+        string path = "C:\\Users\\osman\\OneDrive\\Masaüstü\\mail.txt";
 
         if (!File.Exists(path))
         {
             File.WriteAllText(path, "Game Scores\n");
         }
-
-        File.AppendAllText(path, "Game: Crossy Road, " + "Score: " + score.ToString() + "\n");
+        string fingers = "";
+        for (int i = 0; i < FingersAndAction.activeFingers.Count; i++)
+        {
+            fingers += FingersAndAction.activeFingers[i].ToString() + ", ";
+        }
+        File.AppendAllText(path, "Game: Crossy Road, " + "Score: " + score.ToString()+ ", Action: "+FingersAndAction.handAction.ToString() +  ", Fingers: "+fingers + "\n");
     }
     IEnumerator WaitForPlayerInput()
     {

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 879806243689874042}
   - component: {fileID: 1119598415531343470}
-  - component: {fileID: 1862527795347115002}
+  - component: {fileID: 675396883768554932}
   m_Layer: 0
   m_Name: SceneTransition
   m_TagString: Untagged
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transition: {fileID: 11400000, guid: 013263c83b6a84c4d95beaa8bd163ac8, type: 2}
---- !u!114 &1862527795347115002
+--- !u!114 &675396883768554932
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -34,7 +34,7 @@ public class UDPReceive : MonoBehaviour
                 byte[] dataByte = client.Receive(ref anyIP);
                 data = Encoding.UTF8.GetString(dataByte);
 
-                if (printToConsole) { print(data); }
+                
             }
             catch (Exception err)
             {

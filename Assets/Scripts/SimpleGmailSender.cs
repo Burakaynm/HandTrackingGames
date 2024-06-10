@@ -6,24 +6,27 @@ public static class SimpleGmailSender
 {
     public static void SendEmail(string recipientEmail, string subject, string body)
     {
-        string senderEmail = "test.elin.oglu@gmail.com";
-        string senderPassword = "cqgu tkgh pgnn nzjo\r\n";
+        string senderEmail = "handayinformation@gmail.com";
+        string senderPassword = "nqms qyoc keml ufab";
 
         try
         {
-            MailMessage mail = new MailMessage();
-            SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress(senderEmail);
+            recipientEmail = recipientEmail.Replace("\u200B", "");
+            msg.To.Add(recipientEmail);
+            msg.Subject = subject;
+            msg.Body = body;
 
-            mail.From = new MailAddress(senderEmail);
-            mail.To.Add(recipientEmail);
-            mail.Subject = subject;
-            mail.Body = body;
-
-            smtpServer.Port = 587;
-            smtpServer.Credentials = new NetworkCredential(senderEmail, senderPassword) as ICredentialsByHost;
-            smtpServer.EnableSsl = true;
-
-            smtpServer.Send(mail);
+            SmtpClient smt = new SmtpClient();
+            smt.Host = "smtp.gmail.com";
+            System.Net.NetworkCredential ntcd = new NetworkCredential();
+            ntcd.UserName = senderEmail;
+            ntcd.Password = senderPassword;
+            smt.Credentials = ntcd;
+            smt.EnableSsl = true;
+            smt.Port = 587;
+            smt.Send(msg);
             Debug.Log("Email sent successfully!");
         }
         catch (System.Exception e)

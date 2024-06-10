@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using UnityEngine;
 
 public class ManagerSingleton : MonoBehaviour
@@ -14,6 +16,34 @@ public class ManagerSingleton : MonoBehaviour
         else if (instance != this)
         {
             Destroy(gameObject);
+        }
+    } 
+    // Dosya yolunu belirtin
+    private string filePath = "C:\\Users\\osman\\OneDrive\\Masaüstü\\mail.txt";
+
+    // OnApplicationQuit metodu uygulama kapanmadan hemen önce çaðrýlýr
+    private void OnApplicationQuit()
+    {
+        // Dosya içeriðini oku
+        try
+        {
+            if (File.Exists(filePath))
+            {
+                string content = File.ReadAllText(filePath);
+                string therapistMail = PlayerPrefs.GetString("therapistMail");
+                Debug.Log("-"+therapistMail+"-");
+                SimpleGmailSender.SendEmail("grdrp97@gmail.com", PlayerPrefs.GetString("username"), content);
+                File.Delete(filePath);
+                Debug.Log("Dosya baþarýyla silindi: " + filePath);
+            }
+            else
+            {
+                Debug.LogError("Dosya bulunamadý: " + filePath);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Dosya okunamadý: " + ex.Message);
         }
     }
 }
