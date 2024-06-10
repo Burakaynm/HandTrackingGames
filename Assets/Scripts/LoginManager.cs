@@ -31,8 +31,6 @@ public class LoginManager : MonoBehaviour
     {
         string username = usernameText_UI.text;
         string therapistMail = therapistMailText_UI.text.Trim();
-        usernameText_UI.text = "";
-        therapistMailText_UI.text = "";
 
         if (string.IsNullOrEmpty(username))
         {
@@ -51,23 +49,9 @@ public class LoginManager : MonoBehaviour
         PlayerPrefs.SetString("username", username);
         PlayerPrefs.SetString("therapistMail", therapistMail);
         transform.localScale = Vector3.zero;
-        errorText_UI.text = "";
         selectionScreen.transform.localScale = Vector3.one;
     }
-    public void LogOut()
-    {
-        Debug.Log("LogOut");
-        PlayerPrefs.DeleteKey("username");
-        PlayerPrefs.DeleteKey("therapistMail");
-        transform.localScale = Vector3.one;
-        selectionScreen.transform.localScale = Vector3.zero;
 
-    }
-    public void QuitApp()
-    {
-        Debug.Log("Quit");
-        Application.Quit();
-    }
     private bool IsValidEmail(string email)
     {
         if (string.IsNullOrEmpty(email))

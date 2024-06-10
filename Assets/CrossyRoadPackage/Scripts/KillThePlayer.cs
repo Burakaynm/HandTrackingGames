@@ -18,7 +18,7 @@ public class KillThePlayer : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             Destroy(collision.gameObject);
-            FileWriter.SaveScoreToFile("Crossy Road", Player.instance.score.ToString());
+            player.SaveScoreToFile();
             player.deathPlayer();
             Time.timeScale = 0;
             

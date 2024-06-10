@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,7 +54,6 @@ public static class HandController
             }
             if (FingersAndAction.handAction == HandAction.Close)
             {
-                Console.WriteLine("Action onaylandý");
                 if (allFingersOpen)
                 {
                     canAction = true;

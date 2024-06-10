@@ -13,11 +13,6 @@ public class HandAnimationTrigger : MonoBehaviour
     public List<FingerWithAnimator> fingersWithAnimators;
     public GameObject clickEffect;
 
-    private void Start()
-    {
-        SetSelectedFingers();
-        SetAction();
-    }
 
     public void SetSelectedFingers()
     {

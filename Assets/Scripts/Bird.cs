@@ -48,7 +48,7 @@ public class Bird : MonoBehaviour
 
         }
         gameOverBestScoreText.text = PlayerPrefs.GetInt("BestScore").ToString();
-        FileWriter.SaveScoreToFile("Flappy Bird",score.ToString());
+        SaveScoreToFile(score);
     }
     private void OnEnable()
     {
@@ -85,4 +85,30 @@ public class Bird : MonoBehaviour
         }
     }
 
+    //private void SaveScoreToFile(int score)
+    //{
+    //    string path = "C://Users//serha//Desktop/score.txt";
+
+    //    if (!File.Exists(path))
+    //    {
+    //        File.WriteAllText(path, "Game Scores\n");
+    //    }
+    //    File.AppendAllText(path, "Game: Flappy Bird, " + "Score: " + score.ToString() + "\n");
+    //}
+    public void SaveScoreToFile(int score)
+    {
+        //string path = "C:\\Users\\osman\\OneDrive\\Masaüstü\\mail.txt";
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "mail.txt");
+
+        if (!File.Exists(path))
+        {
+            File.WriteAllText(path, "Game Scores\n");
+        }
+        string fingers = "";
+        for (int i = 0; i < FingersAndAction.activeFingers.Count; i++)
+        {
+            fingers += FingersAndAction.activeFingers[i].ToString() + ", ";
+        }
+        File.AppendAllText(path, "Game: Flappy Bird, " + "Score: " + score.ToString() + ", Action: " + FingersAndAction.handAction.ToString() + ", Fingers: " + fingers + "\n");
+    }
 }
