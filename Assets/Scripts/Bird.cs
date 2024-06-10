@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using System.IO;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
+using System;
 
 public class Bird : MonoBehaviour
 {
@@ -84,14 +85,30 @@ public class Bird : MonoBehaviour
         }
     }
 
-    private void SaveScoreToFile(int score)
+    //private void SaveScoreToFile(int score)
+    //{
+    //    string path = "C://Users//serha//Desktop/score.txt";
+
+    //    if (!File.Exists(path))
+    //    {
+    //        File.WriteAllText(path, "Game Scores\n");
+    //    }
+    //    File.AppendAllText(path, "Game: Flappy Bird, " + "Score: " + score.ToString() + "\n");
+    //}
+    public void SaveScoreToFile(int score)
     {
-        string path = "C://Users//serha//Desktop/score.txt";
+        //string path = "C:\\Users\\osman\\OneDrive\\Masaüstü\\mail.txt";
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "mail.txt");
 
         if (!File.Exists(path))
         {
             File.WriteAllText(path, "Game Scores\n");
         }
-        File.AppendAllText(path, "Game: Flappy Bird, " + "Score: " + score.ToString() + "\n");
+        string fingers = "";
+        for (int i = 0; i < FingersAndAction.activeFingers.Count; i++)
+        {
+            fingers += FingersAndAction.activeFingers[i].ToString() + ", ";
+        }
+        File.AppendAllText(path, "Game: Flappy Bird, " + "Score: " + score.ToString() + ", Action: " + FingersAndAction.handAction.ToString() + ", Fingers: " + fingers + "\n");
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
 using System.IO;
+using System;
 
 public class BoxTowerGameController : MonoBehaviour
 {
@@ -91,15 +92,32 @@ public class BoxTowerGameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void SaveScoreToFile(int score)
+    //private void SaveScoreToFile(int score)
+    //{
+    //    string path = "C://Users//serha//Desktop/score.txt";
+
+    //    if (!File.Exists(path))
+    //    {
+    //        File.WriteAllText(path, "Game Scores\n");
+    //    }
+    //    File.AppendAllText(path, "Game: Box Tower, " + "Score: " + score.ToString() + "\n");
+    //}
+
+    public void SaveScoreToFile(int score)
     {
-        string path = "C://Users//serha//Desktop/score.txt";
+        //string path = "C:\\Users\\osman\\OneDrive\\Masaüstü\\mail.txt";
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "mail.txt");
 
         if (!File.Exists(path))
         {
             File.WriteAllText(path, "Game Scores\n");
         }
-        File.AppendAllText(path, "Game: Box Tower, " + "Score: " + score.ToString() + "\n");
+        string fingers = "";
+        for (int i = 0; i < FingersAndAction.activeFingers.Count; i++)
+        {
+            fingers += FingersAndAction.activeFingers[i].ToString() + ", ";
+        }
+        File.AppendAllText(path, "Game: Tower Box, " + "Score: " + score.ToString() + ", Action: " + FingersAndAction.handAction.ToString() + ", Fingers: " + fingers + "\n");
     }
 
 }
