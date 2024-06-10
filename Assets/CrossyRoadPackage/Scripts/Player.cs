@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using DG.Tweening;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -55,12 +56,14 @@ public class Player : MonoBehaviour
     public void deathPlayer()
     {
         restartPanel.SetActive(true);
+        Debug.Log("öldü");
         string scoreTextLast = "Score: " + score.ToString();
         lastScore.text = scoreTextLast;
     }
     public void SaveScoreToFile()
     {
-        string path = "C:\\Users\\osman\\OneDrive\\Masaüstü\\mail.txt";
+        //string path = "C:\\Users\\osman\\OneDrive\\Masaüstü\\mail.txt";
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "mail.txt");
 
         if (!File.Exists(path))
         {

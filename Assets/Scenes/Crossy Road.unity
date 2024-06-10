@@ -883,6 +883,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rabbit_wander
       objectReference: {fileID: 0}
+    - target: {fileID: 1262440479064932, guid: 829a5f61d90ac4c42b217bbfc1b3cea2, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4005735964643980, guid: 829a5f61d90ac4c42b217bbfc1b3cea2, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
