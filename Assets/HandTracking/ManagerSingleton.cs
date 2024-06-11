@@ -30,9 +30,9 @@ public class ManagerSingleton : MonoBehaviour
             if (File.Exists(filePath))
             {
                 string content = File.ReadAllText(filePath);
-                string therapistMail = PlayerPrefs.GetString("therapistMail");
-                Debug.Log("-"+therapistMail+"-");
-                SimpleGmailSender.SendEmail("grdrp97@gmail.com", PlayerPrefs.GetString("username"), content);
+                string therapistMail = PlayerPrefs.GetString("therapistMail").Trim();
+                therapistMail = therapistMail.Replace("\u200B", "");
+                SimpleGmailSender.SendEmail(therapistMail, PlayerPrefs.GetString("username"), content);
                 File.Delete(filePath);
                 Debug.Log("Dosya baþarýyla silindi: " + filePath);
             }
